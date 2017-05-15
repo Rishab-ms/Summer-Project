@@ -1,0 +1,65 @@
+disha@disha-HP-ProBook-440-G3:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 5.7.18-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database dishasummer;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use dishasummer;
+Database changed
+
+mysql> create table branch(branch_name varchar(100), branch_city char(100), assets varchar(100));
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> create table customer(customer_name char(100) , customer_street varchar(100), customer_city varchar(100));
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> create table loan(loan_number int(100),branch_name char(100), amount int(100));
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> create table borrower(customer_number int(100),loan_number int(100));
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> create table account(account_number varchar(100), branch_name varchar(100), balance int(15));
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> create table depositer(customer_name char(100), account_number int(100));
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_dishasummer |
++-----------------------+
+| account               |
+| borrower              |
+| branch                |
+| customer              |
+| depositor             |
+| loan                  |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> describe account;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| account_number | varchar(100) | YES  |     | NULL    |       |
+| branch_name    | varchar(100) | YES  |     | NULL    |       |
+| balance        | int(15)      | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> exit;
+Bye
+
+disha@disha-HP-ProBook-440-G3:~$ 
