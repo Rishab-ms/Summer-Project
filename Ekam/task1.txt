@@ -1,0 +1,17 @@
+CREATE DATABASE SQLTask1;
+
+USE SQLTask1;
+
+CREATE TABLE Branch (branch_name char(50) NOT NULL, branch_city char(30), assets varchar(100), PRIMARY KEY (branch_name));
+
+CREATE TABLE Customer (customer_name char(30) NOT NULL, customer_street varchar(30), customer_city char(30), PRIMARY KEY(customer_name));
+
+CREATE TABLE Loan (loan_number INTEGER NOT NULL,branch_name char(50), amount INTEGER, PRIMARY KEY(loan_number));
+
+CREATE TABLE Borrower (customer_number INTEGER NOT NULL,loan_number INTEGER NOT NULL, PRIMARY KEY(customer_number),FOREIGN KEY(loan_number) REFERENCES Loan(loan_number));
+
+CREATE TABLE Account( account_number INTEGER NOT NULL, branch_name char(50), balance INTEGER, PRIMARY KEY( account_number));
+
+CREATE TABLE Depositer (customer_name char(30) NOT NULL, account_number INTEGER NOT NULL, PRIMARY KEY(customer_name), FOREIGN KEY (account_number) REFERENCES Account(account_number));
+
+exit;
