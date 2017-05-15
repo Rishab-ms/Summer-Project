@@ -48,8 +48,9 @@ mysql> CREATE TABLE loan (
 Query OK, 0 rows affected (0.28 sec)
 
 mysql> CREATE TABLE borrower (
-    -> costomer_name VARCHAR(255) NOT NULL PRIMARY KEY,
-    -> loan_number INT NOT NULL
+    -> customer_name VARCHAR(255) NOT NULL,
+    -> loan_number INT NOT NULL,
+    PRIMARY KEY(customer_name,loan_number)
     -> );
 Query OK, 0 rows affected (0.29 sec)
 
@@ -60,7 +61,11 @@ mysql> CREATE TABLE acount (
     -> );
 Query OK, 0 rows affected (0.22 sec)
 
-mysql> CREATE TABLE deposit ( customer_name VARCHAR(255) NOT NULL PRIMARY KEY, account_number INT NOT NULL );
+mysql> CREATE TABLE deposit (
+customer_name VARCHAR(255) NOT NULL,
+account_number INT NOT NULL,
+PRIMARY KEY(customer_name,account_number)
+);
 Query OK, 0 rows affected (0.24 sec)
 
 mysql> SHOW TABLES;
