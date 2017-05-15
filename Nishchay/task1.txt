@@ -1,0 +1,47 @@
+mysql> use summer_project;
+Database changed
+mysql> CREATE TABLE branch (
+    -> branch_name varchar(255),
+    -> branch_city varchar(255),
+    -> assets decimal(13, 4),
+    -> PRIMARY KEY (branch_name)
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> CREATE TABLE customer (
+    -> customer_name varchar(255),
+    -> customer_street varchar(255),
+    -> customer_city varchar(255),
+    -> PRIMARY KEY (customer_name)
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> CREATE TABLE loan (
+    -> loan_number int,
+    -> branch_name varchar(255),
+    -> amount decimal(13, 4),
+    -> PRIMARY KEY (loan_number)
+    -> );
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> CREATE TABLE borrower (
+    -> customer_name varchar(255),
+    -> loan_number int,
+    -> CONSTRAINT PK_borrower PRIMARY KEY (customer_name, loan_number)
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> CREATE TABLE account (
+    -> account_number int,
+    -> branch_name varchar(255),
+    -> balance decimal(13, 4),
+    -> PRIMARY KEY (account_number)
+    -> );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> CREATE TABLE depositor (
+    -> customer_name varchar(255),
+    -> account_number int,
+    -> CONSTRAINT PK_depositor PRIMARY KEY (customer_name, account_number)
+    -> );
+Query OK, 0 rows affected (0.23 sec)
