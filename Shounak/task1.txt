@@ -1,0 +1,67 @@
+//branch table;
+
+
+create table branch(
+	branch_name varchar(30),
+    branch_city varchar(30),
+    assets int,
+	primary key(branch_name)
+);
+
+
+
+//customer table;
+
+
+create table customer(
+	customer_name varchar(30),
+    customer_street varchar(30),
+    customer_city varchar(30),
+    primary key(customer_name)
+);
+
+
+
+// loan table;
+
+
+
+create table loan(
+	loan_number bigint,
+	branch_name varchar(30),
+	amount int,
+	primary key(loan_number)
+);
+
+
+
+//borrower table;
+
+
+create table borrower(
+	customer_name varchar(30),
+	loan_number bigint,
+	foreign key(customer_name) references customer(customer_name),
+	foreign key(loan_number) references loan(loan_number)
+);
+
+
+//account table;
+
+create table account(
+	account_number bigint,
+	branch_name varchar(30),
+	balance bigint,
+	primary key(account_number)
+);
+
+//depositor table;
+
+
+create table depositor(
+	customer_name varchar(30),
+	account_number bigint,
+	foreign key(customer_name) references customer(customer_name),
+	foreign key(account_number) references account(account_number)
+);
+
