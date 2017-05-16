@@ -1,0 +1,15 @@
+create database databank;
+use databank;
+create table branch (branch_name varchar(255), branch_city varchar(255), assets varchar(255));
+create table customer (customer_name varchar(255), customer_street varchar(255), customer_city varchar(255));
+create table loan (loan_number int, branch_name varchar(255), amount float);
+create table borrower (customer_name varchar(255), loan_number int);
+create table account (account_number int, branch_name varchar(255), balance float);
+create table depositor (customer_name varchar(255), account_number int);
+alter table branch add primary key(branch_name);
+alter table customer add primary key(customer_name);
+alter table loan add primary key(loan_number);
+alter table borrower add primary key(customer_name);
+alter table account add primary key(account_number);
+alter table depositor add primary key(customer_name);
+exit
