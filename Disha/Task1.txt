@@ -18,22 +18,22 @@ Query OK, 1 row affected (0.00 sec)
 mysql> use dishasummer;
 Database changed
 
-mysql> create table branch(branch_name varchar(100), branch_city char(100), assets varchar(100));
+mysql> create table branch(branch_name varchar(100) PRIMARY KEY, branch_city char(100), assets varchar(100));
 Query OK, 0 rows affected (0.24 sec)
 
-mysql> create table customer(customer_name char(100) , customer_street varchar(100), customer_city varchar(100));
+mysql> create table customer(customer_name char(100) PRIMARY KEY, customer_street varchar(100), customer_city varchar(100));
 Query OK, 0 rows affected (0.19 sec)
 
-mysql> create table loan(loan_number int(100),branch_name char(100), amount int(100));
+mysql> create table loan(loan_number int(100) PRIMARY KEY,branch_name char(100), amount int(100));
 Query OK, 0 rows affected (0.32 sec)
 
-mysql> create table borrower(customer_number int(100),loan_number int(100));
+mysql> create table borrower(customer_number int(100) PRIMARY KEY,loan_number int(100));
 Query OK, 0 rows affected (0.28 sec)
 
-mysql> create table account(account_number varchar(100), branch_name varchar(100), balance int(15));
+mysql> create table account(account_number varchar(100) PRIMARY KEY, branch_name varchar(100), balance int(15));
 Query OK, 0 rows affected (0.30 sec)
 
-mysql> create table depositer(customer_name char(100), account_number int(100));
+mysql> create table depositer(customer_name char(100) PRIMARY KEY, account_number int(100) PRIMARY KEY);
 Query OK, 0 rows affected (0.24 sec)
 
 mysql> show tables;
