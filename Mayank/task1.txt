@@ -1,0 +1,78 @@
+mysql> create database mayank;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use mayank;
+Database changed
+mysql> CREATE TABLE branch (
+    -> branch_name varchar(100),
+    -> branch_city varchar(100),
+    -> assets varchar(100),
+    -> PRIMARY KEY (branch_name));
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> CREATE TABLE customer(
+    -> customer_name varchar(100),
+    -> customer_street varchar(100),
+    -> customer_city varchar(100),
+    -> PRIMARY KEY (customer_name));
+Query OK, 0 rows affected (0.46 sec)
+
+mysql> CREATE TABLE loan(
+    -> loan_number INTEGER,
+    -> branch_name varchar(100),
+    -> amount FLOAT,
+    -> PRIMARY KEY (loan_number));
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> CREATE TABLE borrower(
+    -> customer_name varchar(100),
+    -> loan_number INTEGER,
+    -> PRIMARY KEY (customer_name));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> CREATE TABLE account (
+    -> account_number INTEGER,
+    -> branch_name varchar(100),
+    -> balance FLOAT,
+    -> PRIMARY KEY (account_number));
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> CREATE TABLE depositor(
+    -> customer_name char(100),
+    -> account_number INTEGER,
+    -> PRIMARY KEY (customer_name,account_number));
+Query OK, 0 rows affected (0.46 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_mayank |
++------------------+
+| account          |
+| borrower         |
+| branch           |
+| customer         |
+| depositor        |
+| loan             |
++------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT account FROM mayank
+    -> show account
+    -> \c
+mysql> describe account
+    -> \c
+mysql> SELECT account FROM mayank;
+ERROR 1146 (42S02): Table 'mayank.mayank' doesn't exist
+mysql> describe account;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| account_number | int(11)      | NO   | PRI | NULL    |       |
+| branch_name    | varchar(100) | YES  |     | NULL    |       |
+| balance        | float        | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> exit;
+Bye
+
