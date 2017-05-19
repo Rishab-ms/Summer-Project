@@ -1,2 +1,6 @@
 select loan_number from loan where branch_name="Perryridge" and amount>1200;
 select borrower.customer_name,loan.loan_number,loan.amount from borrower inner join loan on loan.loan_number=borrower.loan_number;
+select * from branch where branch_city<>"Brooklyn" and assets>(select max(assets) from branch where branch_city="Brooklyn");
+select * from customer where customer_street like '%Main%';
+select borrower.customer_name from borrower inner join loan on loan.loan_number=borrower.loan_number where loan.branch_name="Perryridge" order by borrower.customer_name;
+select avg(balance) from account where branch_name="Perryridge";
