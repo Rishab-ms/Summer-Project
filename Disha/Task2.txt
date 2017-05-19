@@ -1,0 +1,5 @@
+SELECT loan_number FROM loan WHERE branch_name='Perryridge' AND amount>1200;
+
+SELECT * FROM loan WHERE branch_name='Perryidge'; 
+
+SELECT branch_name FROM branch WHERE assets > assets [brooklyn];
