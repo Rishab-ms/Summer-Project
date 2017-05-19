@@ -8,10 +8,10 @@ CREATE TABLE customer (customer_name char(80) NOT NULL, customer_street varchar(
 
 CREATE TABLE loan (loan_number int(20) NOT NULL,branch_name char(20), amount int(20), PRIMARY KEY(loan_number));
 
-CREATE TABLE borrower (customer_name int(20) NOT NULL,loan_number int(20) NOT NULL, PRIMARY KEY(customer_number),FOREIGN KEY(loan_number) REFERENCES loan(loan_name));
+CREATE TABLE borrower (customer_name int(20) NOT NULL,loan_number int(20) NOT NULL, FOREIGN KEY(customer_number) REFERENCES customer(customer_name),FOREIGN KEY(loan_number) REFERENCES loan(loan_number), PRIMARY KEY(customer_name,loan_number));
 
 CREATE TABLE account( account_number int(20) NOT NULL, branch_name char(40), balance int(20), PRIMARY KEY( account_number));
 
-CREATE TABLE depositor (customer_name char(20) NOT NULL, account_number int(20) NOT NULL, PRIMARY KEY(customer_name), FOREIGN KEY (account_number) REFERENCES account(account_number));
+CREATE TABLE depositor (customer_name char(20) NOT NULL, account_number int(20) NOT NULL, FOREIGN KEY(customer_name) REFERENCES customer(customer_name), FOREIGN KEY (account_number) REFERENCES account(account_number), PRIMARY KEY(customer_name,account_number));
 
 exit;
