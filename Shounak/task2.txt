@@ -1,0 +1,2 @@
+select loan_number from loan where branch_name="Perryridge" and amount>1200;
+select borrower.customer_name,loan.loan_number,loan.amount from borrower inner join loan on loan.loan_number=borrower.loan_number;
