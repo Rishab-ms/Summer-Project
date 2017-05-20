@@ -4,12 +4,15 @@
 
 3. SELECT branch_name FROM branch WHERE assets>(SELECT max(assets) FROM branch WHERE branch_city="Brooklyn");
 
-4. SELECT customer_name FROM customer WHERE customer_street LIKE 'Main';
+4. SELECT customer_name FROM customer WHERE customer_street LIKE '%Main%';
 
-5. SELECT idk
+5. SELECT borrower.customer_name FROM borrower INNER JOIN loan ON borrower.loan_number=loan.loan_number WHERE loan.branch_name='Perryidge' ORDER BY borrower.customer_name;  
 
-6. SELECT AVG(assets) FROM branch WHERE branch_name='Perryidge';
+6. SELECT AVG(balance) FROM account WHERE branch_name='Perryidge';
 
 7. 
 
+10. SELECT branch_name FROM branch WHERE (SELECT AVG(assets) FROM branch)>1200;
+
+14. SELECT branch_name FROM branch WHERE assets=MAX(assets);
 
