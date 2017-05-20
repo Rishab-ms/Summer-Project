@@ -113,7 +113,21 @@ mysql> describe loan;
 +-----------+
 1 row in set (0.00 sec)
 
-8. 
+8. mysql> select count(distinct account_number)
+    -> from deposit;
++--------------------------------+
+| count(distinct account_number) |
++--------------------------------+
+|                              0 |
++--------------------------------+
+1 row in set (0.08 sec)
+
+9. mysql> select count( distinct account_number) , branch_name
+    -> from account
+    -> group by branch_name asc;
+Empty set (0.05 sec)
+
+10.
 
 
 
