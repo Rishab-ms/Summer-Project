@@ -1,0 +1,32 @@
+mysql> create table Branch(branch_name varchar(100) primary key, branch_city varchar(100), assets varchar(100));
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> create table Customer(customer_name varchar(100) primary key, customer_street varchar(100), customer_city varchar(100));
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> create table Loan(loan_number numeric(20) primary key, branch_name varchar(100), amount numeric(20), foreign key(branch_name) references Branch(branch_name));
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> create table Borrower(customer_name varchar(100) primary key,loan_number numeric(20), foreign key(customer_name) references Customer(customer_name), foreign key(loan_number) references Loan(loan_number));
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> create table Account(account_number numeric(20) primary key, branch_name varchar(100), balance numeric(20), foreign key(branch_name) references Branch(branch_name));
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> create table Depositor(customer_name varchar(100) primary key, account_number numeric(20), foreign key(customer_name) references Customer(customer_name), foreign key(account_number) references Account(account_number));
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_summerweb |
++---------------------+
+| Account             |
+| Borrower            |
+| Branch              |
+| Customer            |
+| Depositor           |
+| Loan                |
++---------------------+
+6 rows in set (0.00 sec)
+
+
