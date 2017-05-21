@@ -1,7 +1,0 @@
-//Query 1
-
-SELECT loan_number FROM loan WHERE branch_name="Perryridge" AND amount>1200;
-
-//Query 2
-
-SELECT b.customer_name, b.loan_number, l.amount FROM borrower AS b, loan AS l WHERE l.branch_name="Perryridge" AND b.loan_number=l.loan_number;

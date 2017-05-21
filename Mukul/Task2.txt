@@ -1,0 +1,33 @@
+//Query 1
+
+SELECT loan_number FROM loan WHERE branch_name="Perryridge" AND amount>1200;
+
+//Query 2
+
+SELECT b.customer_name, b.loan_number, l.amount FROM borrower AS b, loan AS l WHERE l.branch_name="Perryridge" AND b.loan_number=l.loan_number;
+
+//Query 3
+
+//Query 4
+
+SELECT customer_name FROM customer WHERE customer_street LIKE "%main%";
+
+//Query 5
+
+SELECT d.customer_name FROM depositor AS d, account AS a WHERE a.branch_name="Perryridge" AND a.loan_number=d.loan_number ORDER BY d.customer_name;
+
+//Query 6
+
+SELECT AVG(balance) FROM account WHERE branch_name="Perryridge";
+
+//Query 7
+
+SELECT COUNT(*) FROM customer;
+
+//Query 8
+
+SELECT COUNT(*) FROM depositor;
+
+//Query 9
+
+
