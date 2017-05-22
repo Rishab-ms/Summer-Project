@@ -1,30 +1,30 @@
-1. SELECT loan_number FROM loan WHERE branch_name='Perryridge' AND amount>1200;
+1. SELECT loan_number FROM loan WHERE branch_name='Perryridge' AND amount>1200; 
 
 2. SELECT * FROM loan WHERE branch_name='Perryidge'; 
 
-3. SELECT branch_name FROM branch WHERE assets>(SELECT max(assets) FROM branch WHERE branch_city="Brooklyn");
+3. SELECT branch_name FROM branch WHERE assets>(SELECT max(assets) FROM branch WHERE branch_city="Brooklyn"); 
 
-4. SELECT customer_name FROM customer WHERE customer_street LIKE '%Main%';
+4. SELECT customer_name, customer_street FROM customer WHERE customer_street LIKE '%Main%'; 
 
 5. SELECT borrower.customer_name FROM borrower INNER JOIN loan ON borrower.loan_number=loan.loan_number WHERE loan.branch_name='Perryidge' ORDER BY borrower.customer_name;  
 
-6. SELECT AVG(balance) FROM account WHERE branch_name='Perryidge';
+6. SELECT AVG(balance) FROM account WHERE branch_name='Perryidge'; 
 
 7. SELECT COUNT(*) FROM customer;
 
-8. SELECT COUNT(DISTINCT customer_name) FROM depositor;
+8. SELECT COUNT(DISTINCT (customer_name)) FROM depositor; 
 
 9. SELECT COUNT(account.account_number), account.branch_name FROM account INNER JOIN depositor ON account.account_number=depositor.account_number GROUP BY account.branch_name;
 
-10. SELECT branch_name FROM account GROUP BY branch_name HAVING AVG(balance)>1200;
+10. SELECT branch_name FROM account GROUP BY branch_name HAVING AVG(balance)>1200; 
 
-11. SELECT borrower.customer_name FROM borrower INNER JOIN depositor ON borrower.customer_name=depositor.customer_name;
+11. SELECT borrower.customer_name FROM borrower INNER JOIN depositor ON borrower.customer_name=depositor.customer_name; 
 
-12. SELECT DISTINCT customer_name FROM borrower WHERE customer_name NOT IN (SELECT customer_name FROM depositor);
+12. SELECT DISTINCT customer_name FROM borrower WHERE customer_name NOT IN (SELECT customer_name FROM depositor);- correct
 
-13. SELECT borrower.customer_name FROM borrower INNER JOIN depositor ON borrower.customer_name=depositor.customer_name WHERE branch_name='Perryidge';
+13. 
 
-14. SELECT branch_name FROM account WHERE balance=MAX(balance);
+14. SELECT branch_name, balance FROM account WHERE balance=(SELECT MAX(balance) from account); 
 
-15. SELECT DISTINCT customer_name FROM depositor INNER JOIN account ON account.account_number=depositor.account_number WHERE account.branch_name='Perryidge;
+15. SELECT (customer_name) FROM depositor INNER JOIN account ON account.account_number=depositor.account_number WHERE account.branch_name='Perryidge' GROUP BY customer_name HAVING COUNT(1)=1; 
 
