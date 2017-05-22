@@ -10,9 +10,21 @@
 
 6. SELECT AVG(balance) FROM account WHERE branch_name='Perryidge';
 
-7. 
+7. SELECT COUNT(*) FROM customer;
 
-10. SELECT branch_name FROM branch WHERE (SELECT AVG(assets) FROM branch)>1200;
+8. SELECT COUNT(DISTINCT customer_name) FROM depositor;
 
-14. SELECT branch_name FROM branch WHERE assets=MAX(assets);
+9. SELECT COUNT(account.account_number), account.branch_name FROM account INNER JOIN depositor ON account.account_number=depositor.account_number GROUP BY account.branch_name;
+
+10. SELECT branch_name FROM account GROUP BY branch_name HAVING AVG(balance)>1200;
+
+11. SELECT borrower.customer_name FROM borrower INNER JOIN depositor ON borrower.customer_name=depositor.customer_name;
+
+12. SELECT DISTINCT customer_name FROM borrower WHERE customer_name NOT IN (SELECT customer_name FROM depositor);
+
+13. SELECT borrower.customer_name FROM borrower INNER JOIN depositor ON borrower.customer_name=depositor.customer_name WHERE branch_name='Perryidge';
+
+14. SELECT branch_name FROM account WHERE balance=MAX(balance);
+
+15. SELECT DISTINCT customer_name FROM depositor INNER JOIN account ON account.account_number=depositor.account_number WHERE account.branch_name='Perryidge;
 
