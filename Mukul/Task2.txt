@@ -1,0 +1,63 @@
+//Query 1
+
+SELECT loan_number FROM loan WHERE branch_name="Perryridge" AND amount>1200;
+
+//Query 2
+
+SELECT b.customer_name, b.loan_number, l.amount FROM borrower AS b, loan AS l WHERE l.branch_name="Perryridge" AND b.loan_number=l.loan_number;
+
+//Query 3
+
+SELECT branch_name FROM branch WHERE (NOT branch_city="Brookyln") AND assets>(SELECT max(assets) FROM branch WHERE branch_city="Brookyln");
+
+//Query 4
+
+SELECT customer_name FROM customer WHERE customer_street LIKE "%main%";
+
+//Query 5
+
+SELECT d.customer_name FROM depositor AS d, account AS a WHERE a.branch_name="Perryridge" AND a.loan_number=d.loan_number ORDER BY d.customer_name;
+
+//Query 6
+
+SELECT AVG(balance) FROM account WHERE branch_name="Perryridge";
+
+//Query 7
+
+SELECT COUNT(*) FROM customer;
+
+//Query 8
+
+SELECT COUNT(*) FROM depositor;
+
+//Query 9
+
+SELECT COUNT(a.account_number), a.branch_name FROM account AS a, depositor AS d WHERE a.account_number=d.account_number GROUP BY branch_name;
+
+//Query 10
+
+SELECT branch_name FROM account GROUP BY branch_name HAVING AVG(balance)>1200;
+
+//Query 11
+
+SELECT d.customer_name FROM depositor AS d, borrower AS b WHERE d.customer_name=b.customer_name;
+
+//Query 12
+
+SELECT b.customer_name FROM borrower AS b WHERE NOT EXISTS (SELECT * FROM depositor AS d WHERE d.customer_name=b.customer_name);
+
+//Query 13
+
+SELECT d.customer_name FROM depositor AS d, borrower AS b, account AS a, loan AS l WHERE d.customer_name=b.customer_name AND a.account_number=d.account_number AND b.loan_number=l.loan_number AND a.branch_name="Perryridge" AND l.branch_name=a.branch_name;
+
+//Query 14
+
+SELECT branch_name FROM account GROUP BY branch_name ORDER BY SUM(balance) DESC LIMIT 1;
+
+
+//Query 15
+
+SELECT distinct customer_name FROM depositor AS d, account AS a WHERE a.branch_name="Perryridge" AND a.account_number=d.account_number;
+
+
+

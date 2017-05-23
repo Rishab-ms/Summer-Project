@@ -1,0 +1,38 @@
+CREATE TABLE branch (
+    -> branch_name varchar(255) NOT NULL,
+    -> branch_city varchar(255) NOT NULL,
+    -> assets int,
+    -> PRIMARY KEY (branch_name)
+    -> );
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> CREATE TABLE customer (
+    -> customer_name varchar(255) NOT NULL,
+    -> customer_city varchar(255) NOT NULL,
+    -> customer_street varchar(255) NOT NULL,
+    -> PRIMARY KEY (customer_name)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE loan (
+    -> loan_number int NOT NULL,
+    -> amount int,
+    -> branch_name varchar(255),
+    -> PRIMARY KEY (loan_number),
+    -> FOREIGN KEY (branch_name) REFERENCES branch(branch_name)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE borrower (
+    -> customer_name varchar(255) NOT NULL,
+    -> loan_number int,
+    -> PRIMARY KEY (customer_name,loan_number),
+    -> FOREIGN KEY (customer_name) REFERENCES customer(customer_name),
+    -> FOREIGN KEY (loan_number) REFERENCES loan(loan_number)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE account ( account_number int NOT NULL, branch_name varchar(255), balance int, PRIMARY KEY (account_number), FOREIGN KEY (branch_name) REFERENCES branch(branch_name) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE depositor ( customer_name varchar(255), account_number int, PRIMARY KEY (customer_name,account_number), FOREIGN KEY (customer_name) REFERENCES customer(customer_name), FOREIGN KEY (account_number) REFERENCES account(account_number) );

@@ -1,0 +1,176 @@
+mysql> show tables
+    -> ;
++---------------+
+| Tables_in_web |
++---------------+
+| account       |
+| borrower      |
+| branch        |
+| customer      |
+| deposit       |
+| loan          |
++---------------+
+6 rows in set (0.01 sec)
+
+mysql> describe account;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| account_number | int(11)      | NO   | PRI | NULL    | auto_increment |
+| branch_name    | varchar(255) | NO   |     | NULL    |                |
+| balance        | int(11)      | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> describe borrower;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| customer_name | varchar(255) | NO   | PRI | NULL    |       |
+| loan_number   | int(11)      | NO   | PRI | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> describe branch;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| branch_name | varchar(255) | NO   | PRI | NULL    |       |
+| branch_city | varchar(255) | NO   |     | NULL    |       |
+| assets      | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> describe customer;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| customer_name   | varchar(255) | NO   | PRI | NULL    |       |
+| customer_street | varchar(255) | NO   |     | NULL    |       |
+| customer_city   | varchar(255) | NO   |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> describe deposit;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| customer_name  | varchar(255) | NO   | PRI | NULL    |       |
+| account_number | int(11)      | NO   | PRI | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> describe loan;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| loan_number | int(11)      | NO   | PRI | NULL    | auto_increment |
+| branch_name | varchar(255) | NO   |     | NULL    |                |
+| amount      | int(11)      | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+1. select loan_number
+    -> from loan
+    -> where branch_name='Perryridge'
+    -> and amount > 1200 ;
+
+2. select borrower.customer_name, loan.loan_number, loan.amount
+    -> from loan
+    -> inner join borrower on borrower.loan_number = loan.loan_number;
+
+3. SELECT branch_name
+    -> FROM branch
+    -> WHERE assets>( SELECT max(assets)
+    -> FROM branch
+    -> WHERE branch_city="Brooklyn");
+
+4. SELECT customer_name
+    -> FROM customer
+    -> WHERE customer_street LIKE '%Main%';
+
+5. > select deposit.customer_name
+    -> from deposit
+    -> inner join account on deposit.account_number = account.account_number
+    -> where account.branch_name ='Perryridge'
+    -> order by customer_name asc;
+
+6. > select avg(balance)
+    -> from account
+    -> where branch_name = 'Perryridge' ;
++--------------+
+| avg(balance) |
++--------------+
+|         NULL |
++--------------+
+1 row in set (0.08 sec)
+
+7. mysql> select count(*) from customer;
++-----------+
+| count(* ) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+8. mysql> select count(distinct account_number)
+    -> from deposit;
++--------------------------------+
+| count(distinct account_number) |
++--------------------------------+
+|                              0 |
++--------------------------------+
+1 row in set (0.08 sec)
+
+9. mysql> select count( distinct account_number) , branch_name
+    -> from account
+    -> group by branch_name asc;
+Empty set (0.05 sec)
+
+10. mysql> select branch_name
+    -> from account
+    -> group by branch_name
+    -> having avg(balance)>1200;
+Empty set (0.00 sec)
+
+11. mysql> select borrower.customer_name
+    -> from borrower
+    -> inner join deposit on borrower.customer_name=deposit.customer_name;
+Empty set (0.00 sec)
+
+12. mysql> select distinct customer_name
+    -> from borrower
+    -> where customer_name not in(select customer_name
+    -> from deposit;
+Empty set (0.02 sec)
+
+13. mysql> select deposit.customer_name
+    -> from depositor, borrower, loan, account
+    -> where deposit.customer_name=borrower.customer_name
+    -> and account.account_number=deposit.account_number
+    -> and loan.loan_number = borrower.loan_number
+    -> and account.branch_name='Perryridge'
+    -> and loan.branch_name=account.branch_name;
+Empty set (0.00 sec)
+
+
+14. mysql> select branch_name
+    -> from account
+    -> where balance = ( select max(balance)
+    -> from account);
+Empty set (0.00 sec)
+
+15. mysql> select customer_name
+    -> from deposit
+    -> inner join account on deposit.account_number=account.account_number
+    -> where account.branch_name = 'Perryridge'
+    -> group by customer_name
+    -> having count(account.account_number)=1;
+
+
+
+
+
+
+
+

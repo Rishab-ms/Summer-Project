@@ -1,0 +1,19 @@
+mysql>create database hulk;
+mysql> use hulk;
+
+mysql> create table branch(branch_name varchar(255) primary key,branch_city varchar(255),assets varchar(255));
+
+mysql> create table customer(customer_name varchar(255) primary key,customer_street varchar(255),customer_city varchar(255));
+
+mysql> create table loan(loan_number int primary key,branch_name varchar(255),amount int);
+
+mysql> create table borrower(customer_name varchar(255),loan_number int,constraint jk_borrower primary key(customer_name,loan_number));
+
+mysql> create table account(account_number int primary key,branch_name varchar(255),balance int);
+
+ create table depositor(customer_name varchar(255),account_number int,constraint lm_depostior primary key(customer_name,account_number));
+
+
+
+
+
