@@ -1,0 +1,75 @@
+--1
+SELECT loan_number
+FROM loan
+WHERE branch_name = 'Perryridge' AND amount > 1200;
+
+--2
+SELECT borrower.customer_name, borrower.loan_number, loan.amount
+FROM borrower
+INNER JOIN loan ON loan.loan_number = borrower.loan_number
+WHERE loan.branch_name = 'Perryridge'; 
+
+--3
+SELECT branch_name
+FROM branch
+WHERE assets > ANY(SELECT MAX(assets) FROM branch WHERE branch_city = 'Brooklyn');
+
+--4
+SELECT customer_name
+FROM customer
+WHERE customer_street LIKE '%Main%';
+
+--5
+SELECT borrower.customer_name
+FROM borrower
+INNER JOIN loan ON loan.loan_number = borrower.loan_number
+WHERE loan.branch_name = 'Perryridge'
+ORDER BY borrower.customer_name;
+
+--6
+SELECT AVG(balance) AS [average balance at Perryridge branch]
+FROM account
+WHERE branch_name = 'Perryridge';
+
+--7
+SELECT COUNT(customer_name)
+FROM customer;
+
+--8
+SELECT COUNT(account_number)
+FROM depositor;
+
+--9
+SELECT COUNT(account.account_number), account.branch_name
+FROM depositor
+INNER JOIN account ON account.account_number = depositor.account_number
+GROUP BY account.branch_name;
+
+--10
+SELECT AVG(balance) AS [avg balance], branch_name
+FROM account
+GROUP BY branch_name
+HAVING AVG(balance) > 1200;
+
+--11
+SELECT borrower.customer_name
+FROM borrower
+INNER JOIN depositor ON depositor.customer_name = borrower.customer_name;
+
+--12
+SELECT borrower.customer_name
+FROM borrower
+INNER JOIN depositor ON depositor.customer_name != borrower.customer_name;
+
+--13
+SELECT borrower.customer_name
+FROM borrower
+INNER JOIN depositor ON depositor.customer_name = borrower.customer_name;
+WHERE depositor.account_number = ANY(SELECT account_number FROM account WHERE branch_name = 'Perryridge')
+
+--14
+SELECT TOP SUM(balance), branch_name
+FROM account
+GROUP BY branch_name
+ORDER BY SUM(balance) DESC
+LIMIT 1;
