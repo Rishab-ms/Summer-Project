@@ -1,4 +1,4 @@
-1. SELECT loan_number FROM loan WHERE branch_name = 'Perryridge' AND loan_amount > 1200;
+1. SELECT loan_number FROM loan WHERE branch_name = 'Perryridge' AND amount > 1200;
 
 2. SELECT borrower.customer_name, loan.loan_number, loan.loan_amount FROM loan INNER JOIN borrower ON loan.loan_number=borrower.loan_number WHERE branch_name = 'Perryridge branch';
 
@@ -25,7 +25,7 @@
 13. 
 
 
-14. SELECT branch_name FROM account WHERE balance = MAX(balance);
+14. SELECT branch_name FROM account WHERE balance = (SELECT MAX(balance) FROM account);
 
-15. SELECT customer_name FROM depositor INNER JOIN account ON depositor.account_number=account.account_number WHERE account.branch_name = 'Perryridge';
+15. SELECT customer_name FROM depositor INNER JOIN account ON depositor.account_number=account.account_number WHERE account.branch_name = 'Perryridge' GROUP BY customer_name HAVING COUNT(account_number)=1; 
  
