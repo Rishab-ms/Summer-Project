@@ -127,7 +127,46 @@ mysql> describe loan;
     -> group by branch_name asc;
 Empty set (0.05 sec)
 
-10.
+10. mysql> select branch_name
+    -> from account
+    -> group by branch_name
+    -> having avg(balance)>1200;
+Empty set (0.00 sec)
+
+11. mysql> select borrower.customer_name
+    -> from borrower
+    -> inner join deposit on borrower.customer_name=deposit.customer_name;
+Empty set (0.00 sec)
+
+12. mysql> select distinct customer_name
+    -> from borrower
+    -> where customer_name not in(select customer_name
+    -> from deposit;
+Empty set (0.02 sec)
+
+13. mysql> select deposit.customer_name
+    -> from depositor, borrower, loan, account
+    -> where deposit.customer_name=borrower.customer_name
+    -> and account.account_number=deposit.account_number
+    -> and loan.loan_number = borrower.loan_number
+    -> and account.branch_name='Perryridge'
+    -> and loan.branch_name=account.branch_name;
+Empty set (0.00 sec)
+
+
+14. mysql> select branch_name
+    -> from account
+    -> where balance = ( select max(balance)
+    -> from account);
+Empty set (0.00 sec)
+
+15. mysql> select customer_name
+    -> from deposit
+    -> inner join account on deposit.account_number=account.account_number
+    -> where account.branch_name = 'Perryridge'
+    -> group by customer_name
+    -> having count(account.account_number)=1;
+
 
 
 
