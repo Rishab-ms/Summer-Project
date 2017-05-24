@@ -1,0 +1,35 @@
+1.  mysql> SELECT loan_number FROM Loan WHERE branch_name = "Perryridge" AND amount>1200;
+Empty set (0.00 sec)
+ 
+2.  mysql> SELECT Borrower.customer_name, Loan.loan_number, Loan.amount FROM Loan INNER JOIN Borrower ON Loan.loan_number = Borrower.loan_number WHERE Loan.branch_name = "Perryridge";
+Empty set (0.00 sec)
+ 
+3.  mysql> SELECT branch_name, assets FROM Branch WHERE assets > ( SELECT MAX(assets) FROM Branch WHERE branch_city = "Brooklyn");
+Empty set (0.00 sec)
+ 
+4.  mysql> SELECT customer_name FROM Customer WHERE customer_street LIKE  "%Main%";
+Empty set (0.00 sec)
+ 
+5.  mysql> SELECT Borrower.customer_name FROM Borrower INNER JOIN Loan ON Borrower.loan_number = Loan.loan_number WHERE Loan.branch_name = "Perryridge" ORDER BY Borrower.customer_name;
+Empty set (0.00 sec)
+ 
+6. mysql> SELECT AVG(balance) FROM Account WHERE branch_name = "Perryridge";
+ 
+7.  mysql> SELECT COUNT(*) FROM Customer;
+ 
+8. mysql> SELECT COUNT(*) FROM Depositor;
+ 
+9. mysql> SELECT COUNT(Depositor.account_number), Account.branch_name FROM Depositor INNER JOIN Account on Depositor.account_number = Account.account_number GROUP BY Account.branch_name;
+Empty set (0.04 sec)
+ 
+10.  mysql> SELECT branch_name FROM Account GROUP BY branch_name HAVING AVG(balance)>1200;
+Empty set (0.00 sec)
+ 
+11. mysql> SELECT Borrower.customer_name FROM Borrower INNER JOIN Depositor ON Borrower.customer_name = Depositor.customer_name;
+Empty set (0.00 sec)
+ 
+12.  mysql> SELECT Borrower.customer_name FROM Borrower INNER JOIN Depositor ON Borrower.customer_name <> Depositor.customer_name;
+13.  mysql> SELECT Borrower.customer_name FROM ((Borrower INNER JOIN Depositor ON Borrower.customer_name = Depositor.customer_name) INNER JOIN Loan ON Loan.loan_number = Borrower.loan_number)  WHERE Loan.branch_name = "Perryridge";
+Empty set (0.02 sec)
+ 
+ 
