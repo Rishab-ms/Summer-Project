@@ -7,6 +7,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://shreyansh:@localhost/shreyansh'
 db = SQLAlchemy(app)
 
 class Task(db.Model):
+    __tablename__ = 'task'
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Text)
     description = db.Column(db.Text)
@@ -27,11 +29,34 @@ def create():
     db.session.commit()
     return "Data added successfully"
 
-#For returning the details of the person
-@app.route('/read',methods=['POST','GET'])
+#For returning list of tasks
+@app.route('/read',methods=['GET'])
 def read():
+    task = Task.query.all()
+    return render_template('view_task.html',tasks = task)
 
-    return render_template('view_task.html',)
+#For editing a task
+@app.route('/update',methods=['POST'])
+def update():
+    id = request.form["id"]
+    task = Task.query.get(id)
+    if task == None:
+        return 'Task not found'
+    task.title = request.form["title"]
+    task.description = request.form["description"]
+    db.session.commit()
+    return "Task updated successfully"
+
+#For deleting a task
+@app.route('/delete',methods=['POST'])
+def delete():
+    id = request.form["id"]
+    task = Task.query.get(id)
+    if task == None:
+        return 'Task not found'
+    db.session.delete(task)
+    db.session.commit()
+    return "Task deleted successfully"
 
 if __name__ == '__main__':
     app.run(debug=True)
