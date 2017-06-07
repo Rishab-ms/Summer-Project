@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title> Create </title>
+</head>
+
+
+<body>
+
+<form method = "POST">
+
+<div>
+<label for = "name" > Enter your name : </label>
+<input name = "name">
+</div>
+
+<div>
+<label for = "col"> Enter your favourite colour: </label>
+<input name = "col">
+</div>
+
+<div>
+<button> Submit </button>
+<input type = button value = "Go back" onClick = "location.href = '{{url_for('colors')}}'">
+</div>
+
+</form>
+</body>
+</html>

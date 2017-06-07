@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Update </title>
+</head>
+
+<body>
+<form method = "POST">
+	<div>
+		<label for = "name"> Name: </label>
+		<input name = "name">
+	</div>
+	<div>
+		<label for = "fav"> New colour: </label>
+		<input name = "fav">
+	</div>
+	<div>
+	<button> Submit </button>
+	<input type = button value = "Go back" onClick = "location.href = '{{url_for('colors')}}'">
+	</div>
+
+</form>
+</body>
+</html>
