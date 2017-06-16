@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<div class="container">
+	  <div class="jumbotron">
+	    <h1>BLOG APP</h1>
+	    <p>Basic CRUD blog app</p>
+	  </div>
+	</div>
+	<div class="container>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<a href="/view_blog" class="btn btn-primary btn-lg btn-block">View</a>
+			</div>
+			<div class="col-md-3">
+				<a href="/create_blog" class="btn btn-primary btn-lg btn-block">Create</a>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+{% endblock %}

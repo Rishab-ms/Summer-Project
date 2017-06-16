@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<div class="page-header">
+	  <h1 class="text-center">BLOGS</h1>
+	</div>
+	<div class="container">
+		<ul class="list-group">
+			{% for blog in blogs %}
+			<li class="list-group-item">
+				<h3>{{blog.title}}<br><small>{{blog.author}}</small></h3>
+				<p>{{blog.body}}</p>
+				<a href="/view_blog/edit_blog/{{blog.id}}" class="btn btn-default btn-sm">Edit</a>
+				<a href="/view_blog/delete_blog/{{blog.id}}" class="btn btn-danger btn-sm">Delete</a>
+			</li>
+			{% endfor %}
+		</ul>
+		<a href="/" class="btn btn-info btn-block">Home</a>
+	</div>
+{% endblock %}
