@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Read </title>
+</head>
+
+<body>
+	<h4> Colors: </h4>
+	<ul>
+		{% for i in fields %}
+		<li>
+			{{i.id}} <br>
+			{{i.name}} <br>
+			{{i.fav_color}} <br>
+		</li> <br> <br>
+		{% endfor %}
+	</ul>
+	<input type = button value = "Go back"  onClick = "location.href = '{{url_for('colors')}}'">
+</body>
+</html>
