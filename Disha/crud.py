@@ -25,6 +25,18 @@ def create():
     db.session.commit()
     return "Your data has been added"
 
+@app.route('/delete',methods=['POST','GET'])
+def delete():
+    if request.method == "GET":
+		return render_template('/delete.html')
+    id=request.form['id']
+    data = Disha.query.filter_by(id=id).first()
+    if data == None:
+	return "Data for this id not found"
+    db.session.delete(data)
+    db.session.commit()
+    return "Your data has been deleted"
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
