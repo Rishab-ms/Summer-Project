@@ -1,0 +1,119 @@
+//Query 1
+
+Select loan_number
+From loan
+Where 
+	branch_name = 'Perryridge' AND amount > 1200
+
+//Query 2
+
+SELECT borrower.customer_name , loan.loan_number , loan.amount 
+FROM borrower INNER JOIN loan 
+ON loan.loan_number = borrower.loan_number 
+WHERE loan.branch_name = 'Perryridge';
+
+//Query 3
+
+SELECT branch_name 
+FROM branch 
+WHERE assets > max(   
+	 Select assets    
+	 FROM branch    
+	 WHERE branch_city = 'Brooklyn' 
+);
+
+// Query 4
+
+SELECT customer_name
+FROM customer
+WHERE customer_street LIKE "%Main%";
+
+//Query 5
+
+SELECT borrower.customer_name 
+FROM borrower INNER JOIN loan 
+ON loan.loan_number = borrower.loan_number 
+WHERE loan.branch_name = 'Perryridge'
+ORDER BY borrower.customer_name ASC;
+
+//Query 6
+
+SELECT AVG(balance)
+FROM account
+WHERE branch_name = "Perryridge";
+
+//Query 7
+
+SELECT COUNT(*)
+FROM customer;
+
+//Query 8
+
+SELECT COUNT(DISTINCT customer_name ) 
+FROM depositors;
+
+//Query 9
+
+SELECT COUNT(DISTINCT depositors.customer_name)
+FROM depositors INNER JOIN account
+ON account_number
+GROUP BY account.branch_name;
+
+
+//Query 10
+
+SELECT branch_name
+FROM account
+GROUP BY branch_name
+HAVING AVG(balance) >= 1200;
+
+//Query 11
+
+SELECT customer_name
+FROM depositors 
+WHERE customer_name IN 
+       (
+            SELECT DISTINCT customer_name 
+            FROM borrower;
+
+       );
+
+// Query 12
+
+SELECT 	customer_name
+FROM borrower
+WHERE customer_name NOT IN 
+ 	(
+	     SELECT DISTINCT customer_name
+             FROM depositor; 
+        );
+
+//Query 13
+
+SELECT DISTINT customer_name
+FROM borrower
+WHERE customer_name IN
+        (
+             SELECT customer_name 
+	     FROM depositor INNER JOIN account
+             ON depositor.account_number = account.account_ number
+	     WHERE account.branch_name = "Perryridge";
+        );
+
+// Query 14
+
+SELECT branch_name 
+FROM account
+WHERE balance = (
+          SELECT MAX(balance)
+          FROM   account;
+         );
+
+//Query 15
+
+SELECT 	customer_name
+FROM depositor INNER JOIN account 
+WHERE account.branch_name = "Perryridge"
+GROUP BY customer_name 
+HAVING COUNT(account_number) <=1;
+
