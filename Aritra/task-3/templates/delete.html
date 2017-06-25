@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create</title>
+	<style>
+		body{
+			font-size: 30px;
+			color: white;
+			background-color: black; 
+		}
+	</style>
+</head>
+<body>
+{% if message %}
+	{{message}}
+{% endif %}
+<form action="/delete" method="POST">
+	<input type="string" name="username" required placeholder="username"><br>
+	<input type="submit" name="submit">
+</form>
+</body>
+</html>

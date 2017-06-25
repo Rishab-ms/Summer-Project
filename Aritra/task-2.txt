@@ -1,0 +1,2 @@
+1. SELECT loan_number FROM loan WHERE branch_name='perryridge' AND amount>1200;
+2. 

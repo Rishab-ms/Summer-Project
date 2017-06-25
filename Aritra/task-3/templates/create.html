@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create</title>
+	<style>
+		body{
+			font-size: 30px;
+			color: white;
+			background-color: black; 
+		}
+	</style>
+</head>
+<body>
+{% if message %}
+	{{message}}
+{% endif %}
+<form action="/create" method="POST">
+	<input type="string" name="name" required placeholder="name"><br>
+	<input type="string" name="age" required placeholder="age"><br>
+	<input type="string" name="username" required placeholder="username"><br>
+	<input type="password" name="password" required placeholder="password"><br>
+	<input type="submit" name="submit">
+</form>
+</body>
+</html>

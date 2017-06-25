@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>read</title>
+	<style>
+		body{
+			font-size: 30px;
+			color: white;
+			background-color: black; 
+		}
+	</style>
+</head>
+<body>
+{% if message %}
+	{{message}}
+{% endif %}
+<h5>name&nbsp;&nbsp;&nbsp;&nbsp;age&nbsp;&nbsp;&nbsp;&nbsp;username</h5>
+{% if values %}
+	{% for value in values %}
+		{{value.name}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.age}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.username}}
+	{% endfor %}
+{% endif %}
+<br>
+<br>
+<form action="/read" method="POST">
+	<input type="string" name="username" required placeholder="username"><br>
+	<input type="submit" name="submit">
+</form>
+</body>
+</html>
