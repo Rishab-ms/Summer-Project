@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block content %}
+<br><br><h2>Register</h2>
+
+{% if error %}
+
+ <h2> {{error}}  </h2>
+
+{% elif user %}
+<h3> Welcome {{user.name}} </h3>
+<h4>Your username is {{user.username}} </h4><br>
+
+{% else %}
+<form action="">
+  <label>Username <input type="text"></label><br>
+  <label>Password <input type="password"></label>
+</form>
+
+{% endif %}
+
+{% endblock %}
