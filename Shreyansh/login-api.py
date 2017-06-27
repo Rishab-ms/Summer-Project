@@ -1,17 +1,30 @@
 from flask import Flask,request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user
 
 app=Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://shreyansh:@localhost/shreyansh'
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 class User(db.Model):
     __tablename__ = 'login_activity'
 
     username = db.Column(name='username', type_=db.VARCHAR, primary_key=True)
-    password = db.Column(name='password', type_=db.VARCHAR)
+    password = db.Column(name='password', type_=db.TEXT)
+
+    is_authenticated = True
+    is_active = True
+    is_anonymous = False
+    def get_id():
+        return username
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User,query.get(user_id)
 
 @app.route('/')
 def home():
@@ -29,6 +42,7 @@ def login():
         result = "Username not found"
     elif check_password_hash(user.password,data["password"]):
         result = "Successful login"
+        login_user(user, remember=True)
     else:
         result = "Incorrect Password"
     message = {"result":result}
